@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Smart Study App</title>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Timer</h2>
+        <div id="timer">25:00</div>
+        <button class="btn-timer" onclick="startTimer()">Start</button>
+        <button class="btn-timer" onclick="stopTimer()">Stop</button>
+        <button class="btn-timer" onclick="resetTimer()">Reset</button>
+    </div>
+
+    <div class="main-content">
+        <h1>Smart Study App</h1>
+        
+        {% for msg in reminders %}
+        <div class="alert">{{ msg }}</div>
+        {% endfor %}
+
+        <form method="POST" class="task-form">
+            <input type="text" name="title" placeholder="Assignment Name..." required>
+            <input type="date" name="due_date" required>
+            <button type="submit" class="btn-add">Add Task</button>
+        </form>
+
+        <div class="task-list">
+            {% for task in tasks %}
+            <div class="task-card {{ task.status }}">
+                <div>
+                    <strong>{{ task.title }}</strong><br>
+                    <small>Due: {{ task.due_date }}</small>
+                </div>
+                {% if task.status == 'Pending' %}
+                <a href="/done/{{ task.id }}" class="btn-done">Done</a>
+                {% else %}
+                <span class="completed-text">Completed</span>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
