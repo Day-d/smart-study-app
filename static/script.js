@@ -1,34 +1,33 @@
-let timeLeft = 1500;
-let timerId = null;
+let totalSeconds = 25 * 60;
+let remaining = totalSeconds;
+let interval = null;
 
-function updateDisplay() {
-    let mins = Math.floor(timeLeft / 60);
-    let secs = timeLeft % 60;
-    document.getElementById('timer').innerText = 
-        `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+function render() {
+    const m = String(Math.floor(remaining / 60)).padStart(2, '0');
+    const s = String(remaining % 60).padStart(2, '0');
+    document.getElementById('timer').textContent = `${m}:${s}`;
 }
 
 function startTimer() {
-    if (timerId !== null) return;
-    timerId = setInterval(() => {
-        if (timeLeft > 0) {
-            timeLeft--;
-            updateDisplay();
+    if (interval) return;
+    interval = setInterval(() => {
+        if (remaining > 0) {
+            remaining--;
+            render();
         } else {
-            clearInterval(timerId);
-            timerId = null;
-            alert("Time's up! နားဖို့အချိန်တန်ပြီ!");
+            stopTimer();
+            alert('အချိန်ပြည့်ပြီ! ခဏနားလိုက်ပါ ☕');
         }
     }, 1000);
 }
 
 function stopTimer() {
-    clearInterval(timerId);
-    timerId = null;
+    clearInterval(interval);
+    interval = null;
 }
 
 function resetTimer() {
     stopTimer();
-    timeLeft = 1500;
-    updateDisplay();
+    remaining = totalSeconds;
+    render();
 }

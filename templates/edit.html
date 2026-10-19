@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Edit Task</title>
+</head>
+<body class="edit-page">
+    <div class="edit-box">
+        <h1>Edit Task</h1>
+        <form method="POST" class="edit-form">
+            <label>Assignment Name</label>
+            <input type="text" name="title" value="{{ task.title }}" required>
+            <label>Subject</label>
+            <input type="text" name="subject" list="subject-list" value="{{ task.subject or 'General' }}">
+            <datalist id="subject-list">
+                {% for s in subjects %}<option value="{{ s.subject }}">{% endfor %}
+            </datalist>
+            <label>Due date</label>
+            <input type="date" name="due_date" value="{{ task.due_date }}" required>
+            <div class="edit-buttons">
+                <button type="submit" class="btn-add">Save</button>
+                <a href="{{ url_for('index') }}" class="btn-cancel">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
