@@ -77,7 +77,7 @@ def index():
             continue
         days_left = (due - today).days
         if days_left < 0:
-            reminders.append(f"{t['title']}' ရက်လွန်နေတာ ({-days_left} ရက်)ရှိပါပြီ!")
+            reminders.append(f"{t['title']} ရက်လွန်နေတာ ({-days_left} ရက်)ရှိပါပြီ!")
         elif days_left <= 3:
             reminders.append(
                 f"Rule-based reminder assistant: '{t['title']}' အတွက် {days_left} ရက်ပဲလိုတော့တယ်နော်။ စာလုပ်ဖို့ အချိန်တန်ပြီ!"

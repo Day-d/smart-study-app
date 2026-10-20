@@ -16,7 +16,7 @@ function startTimer() {
             render();
         } else {
             stopTimer();
-            alert('အချိန်ပြည့်ပြီ! ခဏနားလိုက်ပါ ☕');
+            alert('အချိန်ပြည့်ပြီ! ခဏနားလိုက်ပါ');
         }
     }, 1000);
 }
